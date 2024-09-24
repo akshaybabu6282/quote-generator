@@ -1,0 +1,25 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.background{
+    background-color: rgba(0, 0, 0, 0.34);
+}
+.heading{
+    margin-top: 150px;
+    margin-bottom: 25px;
+    font-family: "Playwrite DE Grund", cursive;
+    font-weight: bold;
+}
+.inner-div{
+    background-color: rgba(128, 128, 128, 0.451);
+    color: white;
+    border-radius: 10px;
+    padding: 25px;
+}
+.content{
+    font-family: "Gowun Batang", serif;
+}
+.author{
+    font-family: "Gowun Batang", serif;   
+}
