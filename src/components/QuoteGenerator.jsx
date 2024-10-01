@@ -6,15 +6,15 @@ function QuoteGenerator() {
     const [quote, setQuote] = useState('');
     const [author, setAuthor] = useState('');
     const [isFav, setIsFav] = useState(false);
-    const [favorites, setFavorites] = useState([]);//
-    const [showFavorites, setShowFavorites] = useState(false);//
+    const [favorites, setFavorites] = useState([]);
+    const [showFavorites, setShowFavorites] = useState(false);
 
     const handleQuote = async () => {
         try {
             const response = await axios.get('https://dummyjson.com/quotes/random')
             setQuote(response.data.quote)
             setAuthor(response.data.author)
-            setIsFav(favorites.some(fav => fav.quote === response.data.quote && fav.author === response.data.author)); // Check if the new quote is already in favorites //
+            setIsFav(favorites.some(fav => fav.quote === response.data.quote && fav.author === response.data.author)); 
         } catch (error) {
             console.log('Error fetching the quote', error);
         }
@@ -24,24 +24,20 @@ function QuoteGenerator() {
         window.open(`https://twitter.com/intent/tweet?text=" ${quote} " - ${author}`);
     }
 
-    const handleFav = () => { //
+    const handleFav = () => { 
         if (!isFav) { //
             setFavorites([...favorites, { quote, author }])//
-            setIsFav(true); // Mark the current quote as favorite //
+            setIsFav(true); 
         }
     }
     const handleSeeFav = () => {
-        setShowFavorites(!showFavorites); // Toggle to show/hide favorite quotes //
+        setShowFavorites(!showFavorites); 
     }
 
-    const handleRemoveFav = (index) => { //
+    const handleRemoveFav = (index) => { 
         const removedQuote = favorites[index];
-
-        // Remove the quote at the specified index
         const updatedFavorites = favorites.filter((_, i) => i !== index);
         setFavorites(updatedFavorites);
-
-        // If the current quote is the one being removed, reset the favorite state
         if (removedQuote.quote === quote && removedQuote.author === author) {
             setIsFav(false);
         }
@@ -67,16 +63,16 @@ function QuoteGenerator() {
                                     <p className='text-center pt-2 content'>" {quote} "</p>
                                     <p className='author' style={{ textAlign: 'right' }}>- {author}</p>
                                     <hr />
-                                    {/* Buttons for interacting with the quote */}
+                                    {/* Buttons for new quote */}
                                     <button className='btn btn-outline-light mt-1 mb-2 ' onClick={handleQuote}>Get New Quote</button>
 
-                                    {/* Favorite button */}   {/*  */}
+                                    {/* Favorite button */}
                                     {isFav ?
                                         <button className='btn btn-outline-light mt-1 mb-2 ms-3' disabled><i class="fa-solid fa-heart" style={{ color: "red" }}></i></button> :
                                         <button className='btn btn-outline-light mt-1 mb-2 ms-3' onClick={handleFav}><i class="fa-solid fa-heart" ></i></button>
                                     }
 
-                                    {/* Button to show/hide favorite quotes */}  {/*  */}
+                                    {/* Button to show/hide favorite quotes */}
                                     <button className='btn btn-outline-light mt-1 mb-2 ms-3' onClick={handleSeeFav}>
                                         {showFavorites ? "Hide Favorites" : "See Favorites"}
                                     </button>
@@ -85,7 +81,6 @@ function QuoteGenerator() {
                                 </div>
                             </div>
 
-                            {/* Display the list of favorite quotes below the buttons */} {/*  */}
                             {showFavorites && (
                                 <div className=" mt-3">
                                     <h4 className='mt-5 mb-5' style={{ color: 'white', textAlign: 'center' }}>Favorite Quotes</h4>
@@ -95,7 +90,7 @@ function QuoteGenerator() {
                                                 <li key={index}>
                                                     <p className=' text-light'>"{fav.quote}"</p>
                                                     <p className=' text-light' style={{ textAlign: 'right' }}>- {fav.author}</p>
-                                                    <button //
+                                                    <button
                                                         className='btn btn-danger mt-1 mb-2'
                                                         onClick={() => handleRemoveFav(index)}
                                                     >
@@ -109,7 +104,7 @@ function QuoteGenerator() {
                                         <p style={{ textAlign: 'center', color: 'white' }}>No favorite quotes yet!</p>
                                     )}
                                 </div>
-                            )} {/*  */}
+                            )} 
 
                         </div>
                         <div className="col-md-3"></div>
